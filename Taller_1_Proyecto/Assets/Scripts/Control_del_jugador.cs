@@ -12,6 +12,8 @@ public class MoviemientoX : MonoBehaviour
     public float fuerzaSalto = 6f;
     public float longitudRaycast = 0.1f;
     public LayerMask capaSuelo;
+
+    
     
     private bool enSuelo;
     private Rigidbody2D rb;
@@ -20,9 +22,8 @@ public class MoviemientoX : MonoBehaviour
         // Start is called before the first frame update
     void Start()
     {
-    rb = GetComponent<Rigidbody2D>();  
+    rb = GetComponent<Rigidbody2D>();
     }
-
     // Update is called once per frame
     void Update()
     {
@@ -47,11 +48,18 @@ public class MoviemientoX : MonoBehaviour
 
     if(Input.GetKey(KeyCode.LeftShift) && velocidadX !=0)
     {   
+        //GameManager.Instance.PlayCorrerSound();
         animator.SetBool("enSprint", enSprint);
         transform.position = new Vector3(velocidadX + sprintX + posicion.x, posicion.y, posicion.z);  
     }
     else
     {   
+        if (velocidadX > 0 || velocidadX < 0) 
+        {
+        //GameManager.Instance.PlayCaminarSound();
+        }
+        
+
         animator.SetBool("enSprint", !enSprint);
         transform.position = new Vector3(velocidadX + posicion.x, posicion.y, posicion.z);
     }
@@ -60,12 +68,14 @@ public class MoviemientoX : MonoBehaviour
     enSuelo = hit.collider != null;
     if (enSuelo && Input.GetKeyDown(KeyCode.Space))
     {
+        GameManager.Instance.PlaySaltoSound();
         rb.AddForce(new Vector2(0f,fuerzaSalto), ForceMode2D.Impulse);
     }
 
     animator.SetBool("enSuelo", enSuelo);
     
     }
+
 
     void OnDrawGizmos()
 {
