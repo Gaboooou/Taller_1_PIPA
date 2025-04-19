@@ -3,12 +3,16 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Mon_Lila
+  - Mon_Azul
+  - Mon_Verde
+  - Mon_Amarillo
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - piso
   - Water
   - UI
   - 
