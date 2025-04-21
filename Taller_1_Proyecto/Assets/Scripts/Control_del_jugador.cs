@@ -9,7 +9,7 @@ public class MoviemientoX : MonoBehaviour
     public float velocidad = 5f;
     public float Sprint = 3f;
     public Animator animator;
-    public float fuerzaSalto = 6f;
+    public float fuerzaSalto = 8f;
     public float longitudRaycast = 0.1f;
     public LayerMask capaSuelo;
 
