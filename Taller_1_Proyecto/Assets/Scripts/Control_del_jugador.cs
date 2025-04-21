@@ -14,7 +14,8 @@ public class MoviemientoX : MonoBehaviour
     public LayerMask capaSuelo;
 
     
-    
+    private BoxCollider2D boxCollider;
+
     private bool enSuelo;
     private Rigidbody2D rb;
 
@@ -23,12 +24,14 @@ public class MoviemientoX : MonoBehaviour
     void Start()
     {
     rb = GetComponent<Rigidbody2D>();
+    boxCollider = GetComponent<BoxCollider2D>();
     }
     // Update is called once per frame
     void Update()
     {
     float velocidadX = Input.GetAxis("Horizontal")*Time.deltaTime*velocidad;
     float sprintX = Input.GetAxis("Horizontal")*Time.deltaTime*Sprint;
+    float escalarY = Input.GetAxis("Vertical")*Time.deltaTime*velocidad;
 
     
     animator.SetFloat("Movement", velocidadX*velocidad);
@@ -73,15 +76,27 @@ public class MoviemientoX : MonoBehaviour
     }
 
     animator.SetBool("enSuelo", enSuelo);
-    
+
+    if(boxCollider.IsTouchingLayers(LayerMask.GetMask("Escalera")) && Input.GetKey(KeyCode.W)){
+
+        transform.position = new Vector3(posicion.x, posicion.y + escalarY, posicion.z);
+        rb.gravityScale = 0f;
+    }
+    else{
+        rb.gravityScale = 1f;
     }
 
+    }
+    
 
     void OnDrawGizmos()
 {
     Gizmos.color = Color.red;
     Gizmos.DrawLine(transform.position, transform.position + Vector3.down * longitudRaycast);
 }
+
+
+
 
 }
 

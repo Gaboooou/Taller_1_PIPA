@@ -8,6 +8,7 @@ TagManager:
   - Mon_Azul
   - Mon_Verde
   - Mon_Amarillo
+  - Escalera
   layers:
   - Default
   - TransparentFX
@@ -15,7 +16,7 @@ TagManager:
   - piso
   - Water
   - UI
-  - 
+  - Escalera
   - 
   - 
   - 
