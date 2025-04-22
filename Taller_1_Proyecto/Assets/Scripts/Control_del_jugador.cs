@@ -21,10 +21,14 @@ public class MoviemientoX : MonoBehaviour
 
     private bool enSprint;
         // Start is called before the first frame update
+    private AudioSource audioSource;
+    private bool boolParaCaminar = false;
+
     void Start()
     {
     rb = GetComponent<Rigidbody2D>();
     boxCollider = GetComponent<BoxCollider2D>();
+    audioSource = GetComponent<AudioSource>();
     }
     // Update is called once per frame
     void Update()
@@ -33,7 +37,6 @@ public class MoviemientoX : MonoBehaviour
     float sprintX = Input.GetAxis("Horizontal")*Time.deltaTime*Sprint;
     float escalarY = Input.GetAxis("Vertical")*Time.deltaTime*velocidad;
 
-    
     animator.SetFloat("Movement", velocidadX*velocidad);
     
     
@@ -56,19 +59,27 @@ public class MoviemientoX : MonoBehaviour
         transform.position = new Vector3(velocidadX + sprintX + posicion.x, posicion.y, posicion.z);  
     }
     else
-    {   
-        if (velocidadX > 0 || velocidadX < 0) 
+    {  
+
+    if ((velocidadX != 0) && enSuelo && !audioSource.isPlaying && !boolParaCaminar) 
+    {
+        boolParaCaminar = true;
+        GameManager.Instance.PlayCaminarSound();
+    }
+    else if (velocidadX == 0 || !enSuelo)
+    {
+        if (audioSource.isPlaying) 
         {
-        //GameManager.Instance.PlayCaminarSound();
+            audioSource.Stop();
+            boolParaCaminar = false;
         }
+    }
         
 
         animator.SetBool("enSprint", !enSprint);
         transform.position = new Vector3(velocidadX + posicion.x, posicion.y, posicion.z);
     }
 
-    RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, longitudRaycast, capaSuelo);
-    enSuelo = hit.collider != null;
     if (enSuelo && Input.GetKeyDown(KeyCode.Space))
     {
         GameManager.Instance.PlaySaltoSound();
@@ -85,9 +96,10 @@ public class MoviemientoX : MonoBehaviour
     else{
         rb.gravityScale = 1f;
     }
+    RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, longitudRaycast, capaSuelo);
+    enSuelo = hit.collider != null;
 
     }
-    
 
     void OnDrawGizmos()
 {
