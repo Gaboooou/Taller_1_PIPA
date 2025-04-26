@@ -7,6 +7,8 @@ public class SoundManager : MonoBehaviour
     // Start is called before the first frame update
 
     private AudioSource controlSonido;
+
+    public AudioClip sonidoCaminar;
     [SerializeField] private AudioClip[] sound;
 
     
@@ -15,9 +17,19 @@ public class SoundManager : MonoBehaviour
         controlSonido = GetComponent<AudioSource>();
     }
 
-    public void PlaySound(int sonido){
+    public void PlaySound(int sonido,float volumen){
 
-        controlSonido.PlayOneShot(sound[sonido]);
+        controlSonido.PlayOneShot(sound[sonido],volumen);
+    }
+
+    public void PlaySoundLargo(){
+        controlSonido.clip = sonidoCaminar;
+        controlSonido.Play();
+    } 
+
+    public void StopSound(){
+
+        controlSonido.Stop();
     }
 
 

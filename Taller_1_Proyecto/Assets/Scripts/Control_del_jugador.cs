@@ -42,15 +42,18 @@ public class MoviemientoX : MonoBehaviour
 
     if(Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
     {
-    
+    //soundManager.PlaySound(0,0.5f);
     if(velocidadX < 0)
     {
         transform.localScale = new Vector3(-1, 1, 1);
+        
     }
     else if(velocidadX > 0)
-    {
+    {   
         transform.localScale = new Vector3(1, 1, 1);
+        
     }
+    
 
     }
 
@@ -63,11 +66,6 @@ public class MoviemientoX : MonoBehaviour
     }
     else
     {   
-        if (velocidadX > 0 || velocidadX < 0) 
-        {
-        
-        }
-        
 
         animator.SetBool("enSprint", !enSprint);
         transform.position = new Vector3(velocidadX + posicion.x, posicion.y, posicion.z);
@@ -78,7 +76,7 @@ public class MoviemientoX : MonoBehaviour
     if (enSuelo && Input.GetKeyDown(KeyCode.Space))
     {
         rb.AddForce(new Vector2(0f,fuerzaSalto), ForceMode2D.Impulse);
-        soundManager.PlaySound(2);
+        soundManager.PlaySound(2,0.8f);
     }
 
     animator.SetBool("enSuelo", enSuelo);
