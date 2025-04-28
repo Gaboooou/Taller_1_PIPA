@@ -10,10 +10,7 @@ public class GameManager : MonoBehaviour
     public TMP_Text puntostext;
     public AudioSource audioSource;
     public AudioClip SonidoGema;
-    public AudioClip Correr;
-    public AudioClip Saltar;
-    public AudioClip Caminar;
-    
+
     void Awake()
     {
         if(Instance != null && Instance != this)
@@ -54,23 +51,6 @@ public class GameManager : MonoBehaviour
             audioSource = GetComponent<AudioSource>();
         }
     }
-
-    public void PlayCorrerSound()
-    {
-        audioSource.PlayOneShot(Correr);
-    }
-
-public void PlayCaminarSound()
-    {
-        audioSource.PlayOneShot(Caminar);
-    }
-
-public void PlaySaltoSound()
-    {
-        audioSource.PlayOneShot(Saltar);
-    }
-
-
     // Update is called once per frame
     void Update()
     {
