@@ -10,6 +10,8 @@ public class DeathController : MonoBehaviour
         if(collision.gameObject.CompareTag("Player"))
         {
             Destroy(collision.gameObject);
+            FindAnyObjectByType<GameOver>().mostrarGameOver();
+            FindAnyObjectByType<ocultar>().ocultarPANEL();
         }
     }
 
