@@ -71,10 +71,16 @@ public class MoviemientoX : MonoBehaviour
         transform.position = new Vector3(velocidadX + posicion.x, posicion.y, posicion.z);
     }
 
+    
     if (enSuelo && Input.GetKeyDown(KeyCode.Space))
     {
         rb.AddForce(new Vector2(0f,fuerzaSalto), ForceMode2D.Impulse);
         soundManager.PlaySound(2,0.8f);
+    }
+
+    if (enSuelo && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) && (Input.GetKey(KeyCode.W)|| Input.GetKey(KeyCode.UpArrow)))
+    {
+        soundManager.PlaySound(1,0.5f);
     }
 
     animator.SetBool("enSuelo", enSuelo);
@@ -92,10 +98,10 @@ public class MoviemientoX : MonoBehaviour
 
     }
     void OnDrawGizmos()
-{
-    Gizmos.color = Color.red;
-    Gizmos.DrawLine(transform.position, transform.position + Vector3.down * longitudRaycast);
-}
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, transform.position + Vector3.down * longitudRaycast);
+    }
 
 }
 
