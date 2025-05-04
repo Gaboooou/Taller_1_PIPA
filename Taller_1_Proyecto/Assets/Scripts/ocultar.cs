@@ -10,4 +10,8 @@ public class ocultar : MonoBehaviour
     public void ocultarPANEL(){
         ocultarPanel.SetActive(false);
     }
+
+    public void mostrarPANEL(){
+        ocultarPanel.SetActive(true);
+    }
 }
