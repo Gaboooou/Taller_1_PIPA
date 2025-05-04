@@ -13,6 +13,11 @@ public class MoviemientoX : MonoBehaviour
     public float fuerzaSalto = 8f;
     public float longitudRaycast = 0.1f;
     public LayerMask capaSuelo;
+    private bool isWalking = false;
+    private int walkingSoundIndex = 0;
+    
+    
+    
 
     public SoundManager soundManager;
     
@@ -53,6 +58,24 @@ public class MoviemientoX : MonoBehaviour
         transform.localScale = new Vector3(1, 1, 1);
         
     }
+
+    if (velocidadX != 0 && enSuelo)
+    {
+        if (!isWalking)
+        {
+            soundManager.PlaySound(walkingSoundIndex, 0.5f); // Reproducir el sonido de caminar
+            isWalking = true;
+        }
+    }
+    else
+    {
+        if (isWalking)
+        {
+            soundManager.StopSound(); // Detener el sonido de caminar
+            isWalking = false;
+        }
+    }
+
     
 
     }

@@ -29,7 +29,10 @@ public class SoundManager : MonoBehaviour
 
     public void StopSound(){
 
-        controlSonido.Stop();
+        if (controlSonido.isPlaying)
+        {
+            controlSonido.Stop();
+        }
     }
 
 
